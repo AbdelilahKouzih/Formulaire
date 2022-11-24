@@ -44,23 +44,26 @@ namespace TP4_Formulaire
 
         private void btnajouter_Click(object sender, EventArgs e)
         {
-            connection();
+           
 
             if(txtnom.Text ==""||txtprenom.Text==""||txtid.Text=="")
             {
                 MessageBox.Show("vous devez remplir les champs !!");
                     return;
             }
-            cmd.CommandText = "insert into etudiant(nom,prenom,id) values('" + txtnom.Text + "','" + txtprenom.Text + "','" + txtid.Text + "') ";
+            else
+            {
+                connection();
+                cmd.CommandText = "insert into etudiant(nom,prenom,id) values('" + txtnom.Text + "','" + txtprenom.Text + "','" + txtid.Text + "') ";
             cmd.ExecuteNonQuery();
-            cnx.Close();
+            }
             btnannuler.Enabled = true;
             btnmodifier.Enabled = false;
             btnvalider.Enabled = true;
             btnsupprimer.Enabled = false;
             btnafficher.Enabled = false;
             cbx.Enabled = false;
-            
+            cnx.Close();
         }
 
         private void btnafficher_Click(object sender, EventArgs e)
