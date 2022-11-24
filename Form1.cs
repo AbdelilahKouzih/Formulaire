@@ -34,18 +34,29 @@ namespace TP4_Formulaire
         }
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            btnannuler.Enabled = false;
+            btnmodifier.Enabled = false;
+            btnvalider.Enabled = false;
+            btnsupprimer.Enabled = false;
+            btnafficher.Enabled = false;
+            cbx.Enabled = false;
         }
 
         private void btnajouter_Click(object sender, EventArgs e)
         {
             connection();
+
+            if(txtnom.Text ==""||txtprenom.Text==""||txtid.Text=="")
+            {
+                MessageBox.Show("vous devez remplir les champs !!");
+                    return;
+            }
             cmd.CommandText = "insert into etudiant(nom,prenom,id) values('" + txtnom.Text + "','" + txtprenom.Text + "','" + txtid.Text + "') ";
             cmd.ExecuteNonQuery();
             cnx.Close();
-            btnannuler.Enabled = false;
+            btnannuler.Enabled = true;
             btnmodifier.Enabled = false;
-            btnvalider.Enabled = false;
+            btnvalider.Enabled = true;
             btnsupprimer.Enabled = false;
             btnafficher.Enabled = false;
             cbx.Enabled = false;
