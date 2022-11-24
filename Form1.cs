@@ -54,8 +54,7 @@ namespace TP4_Formulaire
             else
             {
                 connection();
-                cmd.CommandText = "insert into etudiant(nom,prenom,id) values('" + txtnom.Text + "','" + txtprenom.Text + "','" + txtid.Text + "') ";
-            cmd.ExecuteNonQuery();
+              
             }
             btnannuler.Enabled = true;
             btnmodifier.Enabled = false;
@@ -108,6 +107,21 @@ namespace TP4_Formulaire
         private void cbx_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnvalider_Click(object sender, EventArgs e)
+        {
+            connection();
+            cmd.CommandText = "insert into etudiant(nom,prenom,id) values('" + txtnom.Text + "','" + txtprenom.Text + "','" + txtid.Text + "') ";
+            cmd.ExecuteNonQuery();
+            cnx.Close();
+        }
+
+        private void btnannuler_Click(object sender, EventArgs e)
+        {
+            txtid.Clear();
+            txtnom.Clear();
+            txtprenom.Clear();
         }
     }
 }
