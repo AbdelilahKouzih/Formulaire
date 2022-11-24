@@ -47,6 +47,8 @@ namespace TP4_Formulaire
             btnmodifier.Enabled = false;
             btnvalider.Enabled = false;
             btnsupprimer.Enabled = false;
+            btnafficher.Enabled = false;
+            cbx.Enabled = false;
             
         }
 
@@ -58,9 +60,15 @@ namespace TP4_Formulaire
             DataTable dt = new DataTable();
             adapter.Fill(dt);
             cbx.DataSource = dt;
-            cbx.ValueMember= "nom";
+            cbx.ValueMember= "id";
             cbx.DisplayMember= "prenom";
             cnx.Close();
+            txtnom.DataBindings.Clear();
+            txtprenom.DataBindings.Clear();
+            txtnom.DataBindings.Add("text", cbx.DataSource, "nom");
+            txtprenom.DataBindings.Add("text",cbx.DataSource, "prenom");
+            txtid.DataBindings.Add("text", cbx.DataSource, "id");
+
         }
 
         private void btnmodifier_Click(object sender, EventArgs e)
