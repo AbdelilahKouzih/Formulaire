@@ -43,32 +43,49 @@ namespace TP4_Formulaire
             cmd.CommandText = "insert into etudiant(nom,prenom,id) values('" + txtnom.Text + "','" + txtprenom.Text + "','" + txtid.Text + "') ";
             cmd.ExecuteNonQuery();
             cnx.Close();
+            btnannuler.Enabled = false;
+            btnmodifier.Enabled = false;
+            btnvalider.Enabled = false;
+            btnsupprimer.Enabled = false;
+            
         }
 
         private void btnafficher_Click(object sender, EventArgs e)
         {
             connection();
-            cmd.CommandText = "select * from Dossier";
+            cmd.CommandText = "select * from etudiant";
            
             DataTable dt = new DataTable();
             adapter.Fill(dt);
-            dgview.DataSource = dt;
+            cbx.DataSource = dt;
+            cbx.ValueMember= "nom";
+            cbx.DisplayMember= "prenom";
             cnx.Close();
         }
 
         private void btnmodifier_Click(object sender, EventArgs e)
         {
             connection();
-            cmd.CommandText = "update etudiant set nom ='" + txtnom.Text + "' , set prenom = '" + txtprenom.Text + "' where id='" + txtid.Text + "' ";
+            cmd.CommandText = "update etudiant set nom ='" + txtnom.Text + "' ,prenom = '" + txtprenom.Text + "' where id='" + txtid.Text + "' ";
             cmd.ExecuteNonQuery();
             cnx.Close();
         }
 
         private void btnsupprimer_Click(object sender, EventArgs e)
-        {
+        {   connection();
             cmd.CommandText = "delete from etudiant where id='" + txtid.Text + "' ";
             cmd.ExecuteNonQuery();
             cnx.Close();
+        }
+
+        private void lblId_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cbx_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -30,8 +30,6 @@
         {
             this.pnlre = new System.Windows.Forms.Panel();
             this.pnlbu = new System.Windows.Forms.Panel();
-            this.pnlco = new System.Windows.Forms.Panel();
-            this.dgview = new System.Windows.Forms.DataGridView();
             this.btnajouter = new System.Windows.Forms.Button();
             this.btnmodifier = new System.Windows.Forms.Button();
             this.btnsupprimer = new System.Windows.Forms.Button();
@@ -44,14 +42,14 @@
             this.lblnom = new System.Windows.Forms.Label();
             this.lblprenom = new System.Windows.Forms.Label();
             this.lblId = new System.Windows.Forms.Label();
+            this.cbx = new System.Windows.Forms.ComboBox();
             this.pnlre.SuspendLayout();
             this.pnlbu.SuspendLayout();
-            this.pnlco.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgview)).BeginInit();
             this.SuspendLayout();
             // 
             // pnlre
             // 
+            this.pnlre.Controls.Add(this.cbx);
             this.pnlre.Controls.Add(this.lblId);
             this.pnlre.Controls.Add(this.lblprenom);
             this.pnlre.Controls.Add(this.lblnom);
@@ -60,7 +58,7 @@
             this.pnlre.Controls.Add(this.txtnom);
             this.pnlre.Location = new System.Drawing.Point(7, 9);
             this.pnlre.Name = "pnlre";
-            this.pnlre.Size = new System.Drawing.Size(791, 105);
+            this.pnlre.Size = new System.Drawing.Size(791, 272);
             this.pnlre.TabIndex = 0;
             // 
             // pnlbu
@@ -71,28 +69,10 @@
             this.pnlbu.Controls.Add(this.btnsupprimer);
             this.pnlbu.Controls.Add(this.btnmodifier);
             this.pnlbu.Controls.Add(this.btnajouter);
-            this.pnlbu.Location = new System.Drawing.Point(7, 419);
+            this.pnlbu.Location = new System.Drawing.Point(7, 287);
             this.pnlbu.Name = "pnlbu";
             this.pnlbu.Size = new System.Drawing.Size(791, 112);
             this.pnlbu.TabIndex = 1;
-            // 
-            // pnlco
-            // 
-            this.pnlco.Controls.Add(this.dgview);
-            this.pnlco.Location = new System.Drawing.Point(5, 117);
-            this.pnlco.Name = "pnlco";
-            this.pnlco.Size = new System.Drawing.Size(791, 303);
-            this.pnlco.TabIndex = 2;
-            // 
-            // dgview
-            // 
-            this.dgview.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgview.Location = new System.Drawing.Point(2, 3);
-            this.dgview.Name = "dgview";
-            this.dgview.RowHeadersWidth = 51;
-            this.dgview.RowTemplate.Height = 24;
-            this.dgview.Size = new System.Drawing.Size(788, 299);
-            this.dgview.TabIndex = 0;
             // 
             // btnajouter
             // 
@@ -154,29 +134,32 @@
             // 
             // txtnom
             // 
-            this.txtnom.Location = new System.Drawing.Point(144, 12);
+            this.txtnom.Location = new System.Drawing.Point(144, 28);
+            this.txtnom.Multiline = true;
             this.txtnom.Name = "txtnom";
-            this.txtnom.Size = new System.Drawing.Size(196, 22);
+            this.txtnom.Size = new System.Drawing.Size(196, 33);
             this.txtnom.TabIndex = 0;
             // 
             // txtprenom
             // 
-            this.txtprenom.Location = new System.Drawing.Point(144, 40);
+            this.txtprenom.Location = new System.Drawing.Point(144, 67);
+            this.txtprenom.Multiline = true;
             this.txtprenom.Name = "txtprenom";
-            this.txtprenom.Size = new System.Drawing.Size(196, 22);
+            this.txtprenom.Size = new System.Drawing.Size(196, 30);
             this.txtprenom.TabIndex = 1;
             // 
             // txtid
             // 
-            this.txtid.Location = new System.Drawing.Point(144, 68);
+            this.txtid.Location = new System.Drawing.Point(144, 103);
+            this.txtid.Multiline = true;
             this.txtid.Name = "txtid";
-            this.txtid.Size = new System.Drawing.Size(196, 22);
+            this.txtid.Size = new System.Drawing.Size(196, 29);
             this.txtid.TabIndex = 2;
             // 
             // lblnom
             // 
             this.lblnom.AutoSize = true;
-            this.lblnom.Location = new System.Drawing.Point(57, 24);
+            this.lblnom.Location = new System.Drawing.Point(57, 45);
             this.lblnom.Name = "lblnom";
             this.lblnom.Size = new System.Drawing.Size(42, 16);
             this.lblnom.TabIndex = 3;
@@ -185,7 +168,7 @@
             // lblprenom
             // 
             this.lblprenom.AutoSize = true;
-            this.lblprenom.Location = new System.Drawing.Point(57, 46);
+            this.lblprenom.Location = new System.Drawing.Point(57, 81);
             this.lblprenom.Name = "lblprenom";
             this.lblprenom.Size = new System.Drawing.Size(60, 16);
             this.lblprenom.TabIndex = 4;
@@ -194,18 +177,27 @@
             // lblId
             // 
             this.lblId.AutoSize = true;
-            this.lblId.Location = new System.Drawing.Point(57, 74);
+            this.lblId.Location = new System.Drawing.Point(57, 116);
             this.lblId.Name = "lblId";
             this.lblId.Size = new System.Drawing.Size(24, 16);
             this.lblId.TabIndex = 5;
             this.lblId.Text = "Id :";
+            this.lblId.Click += new System.EventHandler(this.lblId_Click);
+            // 
+            // cbx
+            // 
+            this.cbx.FormattingEnabled = true;
+            this.cbx.Location = new System.Drawing.Point(417, 67);
+            this.cbx.Name = "cbx";
+            this.cbx.Size = new System.Drawing.Size(328, 24);
+            this.cbx.TabIndex = 6;
+            this.cbx.SelectedIndexChanged += new System.EventHandler(this.cbx_SelectedIndexChanged);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 533);
-            this.Controls.Add(this.pnlco);
+            this.ClientSize = new System.Drawing.Size(800, 404);
             this.Controls.Add(this.pnlbu);
             this.Controls.Add(this.pnlre);
             this.Name = "Form1";
@@ -214,8 +206,6 @@
             this.pnlre.ResumeLayout(false);
             this.pnlre.PerformLayout();
             this.pnlbu.ResumeLayout(false);
-            this.pnlco.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgview)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -224,7 +214,6 @@
 
         private System.Windows.Forms.Panel pnlre;
         private System.Windows.Forms.Panel pnlbu;
-        private System.Windows.Forms.Panel pnlco;
         private System.Windows.Forms.Label lblId;
         private System.Windows.Forms.Label lblprenom;
         private System.Windows.Forms.Label lblnom;
@@ -237,7 +226,7 @@
         private System.Windows.Forms.Button btnsupprimer;
         private System.Windows.Forms.Button btnmodifier;
         private System.Windows.Forms.Button btnajouter;
-        private System.Windows.Forms.DataGridView dgview;
+        private System.Windows.Forms.ComboBox cbx;
     }
 }
 
