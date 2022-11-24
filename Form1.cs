@@ -35,11 +35,12 @@ namespace TP4_Formulaire
         private void Form1_Load(object sender, EventArgs e)
         {
             btnannuler.Enabled = false;
-            btnmodifier.Enabled = false;
+            btnmodifier.Enabled = true;
             btnvalider.Enabled = false;
-            btnsupprimer.Enabled = false;
-            btnafficher.Enabled = false;
-            cbx.Enabled = false;
+            btnsupprimer.Enabled = true;
+            btnafficher.Enabled = true;
+            cbx.Enabled = true;
+
         }
 
         private void btnajouter_Click(object sender, EventArgs e)
@@ -61,13 +62,29 @@ namespace TP4_Formulaire
             btnvalider.Enabled = true;
             btnsupprimer.Enabled = false;
             btnafficher.Enabled = false;
+            txtid.Enabled = false;
+            txtnom.Enabled = false;
+            txtprenom.Enabled = false;
             cbx.Enabled = false;
+            
             cnx.Close();
         }
 
         private void btnafficher_Click(object sender, EventArgs e)
         {
+
+
+
             connection();
+            btnannuler.Enabled = true;
+            btnmodifier.Enabled = true;
+            btnvalider.Enabled = true;
+            btnsupprimer.Enabled = true;
+            btnafficher.Enabled = false;
+            cbx.Enabled = true;
+            txtnom.Enabled = false;
+            txtprenom.Enabled = false;
+            txtid.Enabled = false;
             cmd.CommandText = "select * from etudiant";
            
             DataTable dt = new DataTable();
@@ -112,6 +129,9 @@ namespace TP4_Formulaire
         private void btnvalider_Click(object sender, EventArgs e)
         {
             connection();
+            txtid.Enabled = true;
+            txtnom.Enabled = true;
+            txtprenom.Enabled = true;
             cmd.CommandText = "insert into etudiant(nom,prenom,id) values('" + txtnom.Text + "','" + txtprenom.Text + "','" + txtid.Text + "') ";
             cmd.ExecuteNonQuery();
             cnx.Close();
@@ -122,6 +142,10 @@ namespace TP4_Formulaire
             txtid.Clear();
             txtnom.Clear();
             txtprenom.Clear();
+            btnmodifier.Enabled = true;
+           
+            btnsupprimer.Enabled = true;
+            btnafficher.Enabled = true;
         }
     }
 }
