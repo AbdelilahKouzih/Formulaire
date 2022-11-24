@@ -102,6 +102,7 @@
             this.btnajouter.TabIndex = 0;
             this.btnajouter.Text = "ajouter";
             this.btnajouter.UseVisualStyleBackColor = true;
+            this.btnajouter.Click += new System.EventHandler(this.btnajouter_Click);
             // 
             // btnmodifier
             // 
@@ -111,6 +112,7 @@
             this.btnmodifier.TabIndex = 1;
             this.btnmodifier.Text = "modifier";
             this.btnmodifier.UseVisualStyleBackColor = true;
+            this.btnmodifier.Click += new System.EventHandler(this.btnmodifier_Click);
             // 
             // btnsupprimer
             // 
@@ -120,6 +122,7 @@
             this.btnsupprimer.TabIndex = 2;
             this.btnsupprimer.Text = "supprimer";
             this.btnsupprimer.UseVisualStyleBackColor = true;
+            this.btnsupprimer.Click += new System.EventHandler(this.btnsupprimer_Click);
             // 
             // btnafficher
             // 
@@ -129,6 +132,7 @@
             this.btnafficher.TabIndex = 3;
             this.btnafficher.Text = "afficher";
             this.btnafficher.UseVisualStyleBackColor = true;
+            this.btnafficher.Click += new System.EventHandler(this.btnafficher_Click);
             // 
             // btnannuler
             // 
@@ -206,6 +210,7 @@
             this.Controls.Add(this.pnlre);
             this.Name = "Form1";
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.pnlre.ResumeLayout(false);
             this.pnlre.PerformLayout();
             this.pnlbu.ResumeLayout(false);
