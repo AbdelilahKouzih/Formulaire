@@ -151,7 +151,12 @@ namespace TP4_Formulaire
             txtid.Enabled = true;
             txtnom.Enabled = true;
             txtprenom.Enabled = true;
-            cmd.CommandText = "insert into etudiant(nom,prenom,id) values('" + txtnom.Text + "','" + txtprenom.Text + "','" + txtid.Text + "') ";
+
+                txtid.Clear();
+                txtnom.Clear();
+                txtprenom.Clear();
+
+                cmd.CommandText = "insert into etudiant(nom,prenom,id) values('" + txtnom.Text + "','" + txtprenom.Text + "','" + txtid.Text + "') ";
             cmd.ExecuteNonQuery();
             cnx.Close();
             }
