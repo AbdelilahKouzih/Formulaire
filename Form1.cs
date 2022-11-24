@@ -5,6 +5,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
+using System.Security;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -18,6 +19,7 @@ namespace TP4_Formulaire
             InitializeComponent();
         }
 
+        static int Verif = 0;
         static string chaine = @"Data Source=DESKTOP-ID5FAVQ\SQLEXPRESS;Initial Catalog=database;Integrated Security=True";
         
         static SqlConnection cnx = new SqlConnection(chaine);
@@ -45,7 +47,7 @@ namespace TP4_Formulaire
 
         private void btnajouter_Click(object sender, EventArgs e)
         {
-           
+            Verif = 1;
 
             if(txtnom.Text ==""||txtprenom.Text==""||txtid.Text=="")
             {
@@ -103,14 +105,28 @@ namespace TP4_Formulaire
 
         private void btnmodifier_Click(object sender, EventArgs e)
         {
+            Verif = 2;
+            if (txtid.Text == "")
+            {
+                MessageBox.Show("vous devez remplir le champ d'identifiant !!");
+                return;
+            }
             connection();
+            btnsupprimer.Enabled = false;
+            btnafficher.Enabled = false;
+            btnajouter.Enabled = false;
+            btnvalider.Enabled = true;
+            btnannuler.Enabled = true;
             cmd.CommandText = "update etudiant set nom ='" + txtnom.Text + "' ,prenom = '" + txtprenom.Text + "' where id='" + txtid.Text + "' ";
             cmd.ExecuteNonQuery();
             cnx.Close();
         }
 
         private void btnsupprimer_Click(object sender, EventArgs e)
-        {   connection();
+
+        {
+            Verif = 3;
+            connection();
             cmd.CommandText = "delete from etudiant where id='" + txtid.Text + "' ";
             cmd.ExecuteNonQuery();
             cnx.Close();
@@ -128,6 +144,9 @@ namespace TP4_Formulaire
 
         private void btnvalider_Click(object sender, EventArgs e)
         {
+
+            if(Verif==1)
+            { 
             connection();
             txtid.Enabled = true;
             txtnom.Enabled = true;
@@ -135,10 +154,18 @@ namespace TP4_Formulaire
             cmd.CommandText = "insert into etudiant(nom,prenom,id) values('" + txtnom.Text + "','" + txtprenom.Text + "','" + txtid.Text + "') ";
             cmd.ExecuteNonQuery();
             cnx.Close();
+            }
+            else if(Verif==2)
+            {
+
+
+            }
         }
 
         private void btnannuler_Click(object sender, EventArgs e)
         {
+             if(Verif==1) 
+            { 
             txtid.Clear();
             txtnom.Clear();
             txtprenom.Clear();
@@ -146,6 +173,7 @@ namespace TP4_Formulaire
            
             btnsupprimer.Enabled = true;
             btnafficher.Enabled = true;
+            }
         }
     }
 }
