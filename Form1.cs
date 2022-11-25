@@ -38,13 +38,11 @@ namespace TP4_Formulaire
         public void annuler()
         {
 
-            txtid.Clear();
-            txtnom.Clear();
-            txtprenom.Clear();
+           function_clear();
             btnmodifier.Enabled = true;
-            txtid.Enabled = true;
-            txtnom.Enabled = true;
-            txtprenom.Enabled = true;
+            txtid.Enabled = false;
+            txtnom.Enabled = false;
+            txtprenom.Enabled = false;
             btnsupprimer.Enabled = true;
             btnafficher.Enabled = true;
             btnajouter.Enabled = true;
@@ -55,17 +53,24 @@ namespace TP4_Formulaire
         public void etatinitial()
         {
 
-            txtid.Clear();
-            txtnom.Clear();
-            txtprenom.Clear();
+            function_clear();
             txtid.Enabled = true;
             txtnom.Enabled = true;
             txtprenom.Enabled = true;
-
+            btnvalider.Enabled = false;
+            btnannuler.Enabled = false; 
             btnmodifier.Enabled = true;
             btnsupprimer.Enabled = true;
             btnafficher.Enabled = true;
             btnajouter.Enabled = true;
+        }
+
+        public void function_clear()
+        {
+            txtid.Clear();
+            txtnom.Clear();
+            txtprenom.Clear();
+
         }
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -76,7 +81,11 @@ namespace TP4_Formulaire
             btnmodifier.Enabled = true;
             btnsupprimer.Enabled = true;
             btnafficher.Enabled = true;
-            cbx.Enabled = true;
+            btnajouter.Enabled = true;
+            txtid.Enabled = false;
+            txtnom.Enabled = false;
+            txtprenom.Enabled = false;
+            cbx.Enabled = false;
 
         }
 
@@ -84,24 +93,20 @@ namespace TP4_Formulaire
         {
             Verif = 1;
 
-            if(txtnom.Text ==""||txtprenom.Text==""||txtid.Text=="")
-            {
-                MessageBox.Show("vous devez remplir les champs !!");
-                    return;
-            }
+           
            
             connection();
-              
-            
+            function_clear();
+
             btnannuler.Enabled = true;
             btnmodifier.Enabled = false;
             btnvalider.Enabled = true;
             btnajouter.Enabled = false;
             btnsupprimer.Enabled = false;
             btnafficher.Enabled = false;
-            txtid.Enabled = false;
-            txtnom.Enabled = false;
-            txtprenom.Enabled = false;
+            txtid.Enabled = true;
+            txtnom.Enabled = true;
+            txtprenom.Enabled = true;
             cbx.Enabled = false;
             
             
@@ -114,15 +119,16 @@ namespace TP4_Formulaire
 
 
             connection();
+          
             btnannuler.Enabled = false;
             btnmodifier.Enabled = true;
             btnvalider.Enabled = false;
             btnsupprimer.Enabled = true;
             btnafficher.Enabled = false;
             cbx.Enabled = true;
-            txtnom.Enabled = true;
-            txtprenom.Enabled = true;
-            txtid.Enabled = true;
+            txtnom.Enabled = false;
+            txtprenom.Enabled = false;
+            txtid.Enabled = false;
             cmd.CommandText = "select * from etudiant";
            
             DataTable dt = new DataTable();
@@ -133,6 +139,7 @@ namespace TP4_Formulaire
             cnx.Close();
             txtnom.DataBindings.Clear();
             txtprenom.DataBindings.Clear();
+            txtid.DataBindings.Clear();
             txtnom.DataBindings.Add("text", cbx.DataSource, "nom");
             txtprenom.DataBindings.Add("text",cbx.DataSource, "prenom");
             txtid.DataBindings.Add("text", cbx.DataSource, "id");
@@ -142,12 +149,12 @@ namespace TP4_Formulaire
         private void btnmodifier_Click(object sender, EventArgs e)
         {
             Verif = 2;
-            if (txtid.Text == "")
-            {
-                MessageBox.Show("vous devez remplir le champ d'identifiant !!");
-                return;
-            }
+           
             connection();
+            txtprenom.Enabled = true;
+            txtid.Enabled = true;
+            txtnom.Enabled = true;
+            cbx.Enabled = false;
             btnsupprimer.Enabled = false;
             btnafficher.Enabled = false;
             btnajouter.Enabled = false;
@@ -162,12 +169,13 @@ namespace TP4_Formulaire
 
         {
             Verif = 3;
-            if (txtid.Text == "")
-            {
-                MessageBox.Show("vous devez remplir le champ d'identifiant !!");
-                return;
-            }
+           
             connection();
+           function_clear();
+            cbx.Enabled = false;
+            txtid.Enabled=true;
+            txtnom.Enabled = true;
+            txtprenom.Enabled = true;
             btnsupprimer.Enabled = false;
             btnafficher.Enabled = false;
             btnajouter.Enabled = false;
@@ -191,14 +199,19 @@ namespace TP4_Formulaire
         private void btnvalider_Click(object sender, EventArgs e)
         {
 
-            btnvalider.Enabled = false;
-            btnannuler.Enabled = false; 
+            
             if(Verif==1)
-            { 
+            {
+                if (txtnom.Text == "" || txtprenom.Text == "" || txtid.Text == "")
+                {
+                    MessageBox.Show("vous devez remplir les champs !!");
+                    return;
+                }
             connection();
-            etatinitial();
+           
             cmd.CommandText = "insert into etudiant(nom,prenom,id) values('" + txtnom.Text + "','" + txtprenom.Text + "','" + txtid.Text + "') ";
             cmd.ExecuteNonQuery();
+            etatinitial();
             cnx.Close();
             }
             else if(Verif==2)
