@@ -35,6 +35,28 @@ namespace TP4_Formulaire
 
         }
 
+        public void cbx_affichage()
+        {
+
+
+           
+            cmd.CommandText = "select * from etudiant";
+
+            DataTable dt = new DataTable();
+            adapter.Fill(dt);
+            cbx.DataSource = dt;
+            cbx.ValueMember = "id";
+            cbx.DisplayMember = "prenom";
+           
+            txtnom.DataBindings.Clear();
+            txtprenom.DataBindings.Clear();
+            txtid.DataBindings.Clear();
+            txtnom.DataBindings.Add("text", cbx.DataSource, "nom");
+            txtprenom.DataBindings.Add("text", cbx.DataSource, "prenom");
+            txtid.DataBindings.Add("text", cbx.DataSource, "id");
+          
+        }
+
         public void annuler()
         {
 
@@ -44,7 +66,7 @@ namespace TP4_Formulaire
             txtnom.Enabled = false;
             txtprenom.Enabled = false;
             btnsupprimer.Enabled = true;
-            btnafficher.Enabled = true;
+           
             btnajouter.Enabled = true;
             btnannuler.Enabled = false;
             btnvalider.Enabled = false;
@@ -61,8 +83,9 @@ namespace TP4_Formulaire
             btnannuler.Enabled = false; 
             btnmodifier.Enabled = true;
             btnsupprimer.Enabled = true;
-            btnafficher.Enabled = true;
+          
             btnajouter.Enabled = true;
+            cbx.Enabled = true;
         }
 
         public void function_clear()
@@ -74,18 +97,21 @@ namespace TP4_Formulaire
         }
         private void Form1_Load(object sender, EventArgs e)
         {
-           
-           
+
+            connection();
             btnannuler.Enabled = false;
             btnvalider.Enabled = false;
             btnmodifier.Enabled = true;
             btnsupprimer.Enabled = true;
-            btnafficher.Enabled = true;
+            
             btnajouter.Enabled = true;
             txtid.Enabled = false;
             txtnom.Enabled = false;
             txtprenom.Enabled = false;
-            cbx.Enabled = false;
+            cbx.Enabled = true;
+
+            cbx_affichage();
+            cnx.Close();
 
         }
 
@@ -103,49 +129,17 @@ namespace TP4_Formulaire
             btnvalider.Enabled = true;
             btnajouter.Enabled = false;
             btnsupprimer.Enabled = false;
-            btnafficher.Enabled = false;
+          
             txtid.Enabled = true;
             txtnom.Enabled = true;
             txtprenom.Enabled = true;
-            cbx.Enabled = false;
-            
-            
-            cnx.Close();
-        }
-
-        private void btnafficher_Click(object sender, EventArgs e)
-        {
-
-
-
-            connection();
-          
-            btnannuler.Enabled = false;
-            btnmodifier.Enabled = true;
-            btnvalider.Enabled = false;
-            btnsupprimer.Enabled = true;
-            btnafficher.Enabled = false;
             cbx.Enabled = true;
-            txtnom.Enabled = false;
-            txtprenom.Enabled = false;
-            txtid.Enabled = false;
-            cmd.CommandText = "select * from etudiant";
-           
-            DataTable dt = new DataTable();
-            adapter.Fill(dt);
-            cbx.DataSource = dt;
-            cbx.ValueMember= "id";
-            cbx.DisplayMember= "prenom";
+            
+            
             cnx.Close();
-            txtnom.DataBindings.Clear();
-            txtprenom.DataBindings.Clear();
-            txtid.DataBindings.Clear();
-            txtnom.DataBindings.Add("text", cbx.DataSource, "nom");
-            txtprenom.DataBindings.Add("text",cbx.DataSource, "prenom");
-            txtid.DataBindings.Add("text", cbx.DataSource, "id");
-
         }
 
+        
         private void btnmodifier_Click(object sender, EventArgs e)
         {
             Verif = 2;
@@ -154,15 +148,17 @@ namespace TP4_Formulaire
             txtprenom.Enabled = true;
             txtid.Enabled = true;
             txtnom.Enabled = true;
-            cbx.Enabled = false;
+            cbx.Enabled = true;
             btnsupprimer.Enabled = false;
-            btnafficher.Enabled = false;
+           
             btnajouter.Enabled = false;
             btnvalider.Enabled = true;
             btnannuler.Enabled = true;
             btnmodifier.Enabled = false;
-           
+            function_clear();
+            cbx_affichage();
             cnx.Close();
+           
         }
 
         private void btnsupprimer_Click(object sender, EventArgs e)
@@ -171,19 +167,21 @@ namespace TP4_Formulaire
             Verif = 3;
            
             connection();
-           function_clear();
-            cbx.Enabled = false;
+           
+            cbx.Enabled = true;
             txtid.Enabled=true;
             txtnom.Enabled = true;
             txtprenom.Enabled = true;
             btnsupprimer.Enabled = false;
-            btnafficher.Enabled = false;
+          
             btnajouter.Enabled = false;
             btnvalider.Enabled = true;
             btnannuler.Enabled = true;
             btnmodifier.Enabled = false;
-          
+            cbx_affichage();
+            function_clear();
             cnx.Close();
+          
         }
 
         private void lblId_Click(object sender, EventArgs e)
@@ -193,7 +191,7 @@ namespace TP4_Formulaire
 
         private void cbx_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+           
         }
 
         private void btnvalider_Click(object sender, EventArgs e)
@@ -212,26 +210,34 @@ namespace TP4_Formulaire
             cmd.CommandText = "insert into etudiant(nom,prenom,id) values('" + txtnom.Text + "','" + txtprenom.Text + "','" + txtid.Text + "') ";
             cmd.ExecuteNonQuery();
             etatinitial();
-            cnx.Close();
+                cbx_affichage();
+                cnx.Close();
+            
             }
             else if(Verif==2)
             {
                 connection();
-                etatinitial();
+               
                 cmd.CommandText = "update etudiant set nom ='" + txtnom.Text + "' ,prenom = '" + txtprenom.Text + "' where id='" + txtid.Text + "' ";
                 cmd.ExecuteNonQuery();
+                etatinitial();
+                cbx_affichage();
                 cnx.Close();
+                
             }
             else if (Verif == 3)
             {
 
                 MessageBox.Show("vous avez sûre !!");
                 connection();
-                etatinitial();
+               
                 cmd.CommandText = "delete from etudiant where id='" + txtid.Text + "' ";
                 cmd.ExecuteNonQuery();
+                etatinitial();
                 MessageBox.Show("la ligne a été bien supprimer");
+                cbx_affichage();
                 cnx.Close();
+                
             }
         }
 

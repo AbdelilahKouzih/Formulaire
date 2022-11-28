@@ -39,7 +39,6 @@
             this.pnlbu = new System.Windows.Forms.Panel();
             this.btnvalider = new System.Windows.Forms.Button();
             this.btnannuler = new System.Windows.Forms.Button();
-            this.btnafficher = new System.Windows.Forms.Button();
             this.btnsupprimer = new System.Windows.Forms.Button();
             this.btnmodifier = new System.Windows.Forms.Button();
             this.btnajouter = new System.Windows.Forms.Button();
@@ -126,7 +125,6 @@
             // 
             this.pnlbu.Controls.Add(this.btnvalider);
             this.pnlbu.Controls.Add(this.btnannuler);
-            this.pnlbu.Controls.Add(this.btnafficher);
             this.pnlbu.Controls.Add(this.btnsupprimer);
             this.pnlbu.Controls.Add(this.btnmodifier);
             this.pnlbu.Controls.Add(this.btnajouter);
@@ -137,7 +135,7 @@
             // 
             // btnvalider
             // 
-            this.btnvalider.Location = new System.Drawing.Point(649, 35);
+            this.btnvalider.Location = new System.Drawing.Point(399, 35);
             this.btnvalider.Name = "btnvalider";
             this.btnvalider.Size = new System.Drawing.Size(96, 43);
             this.btnvalider.TabIndex = 5;
@@ -154,16 +152,6 @@
             this.btnannuler.Text = "annuler";
             this.btnannuler.UseVisualStyleBackColor = true;
             this.btnannuler.Click += new System.EventHandler(this.btnannuler_Click);
-            // 
-            // btnafficher
-            // 
-            this.btnafficher.Location = new System.Drawing.Point(404, 35);
-            this.btnafficher.Name = "btnafficher";
-            this.btnafficher.Size = new System.Drawing.Size(96, 43);
-            this.btnafficher.TabIndex = 3;
-            this.btnafficher.Text = "afficher";
-            this.btnafficher.UseVisualStyleBackColor = true;
-            this.btnafficher.Click += new System.EventHandler(this.btnafficher_Click);
             // 
             // btnsupprimer
             // 
@@ -224,7 +212,6 @@
         private System.Windows.Forms.TextBox txtnom;
         private System.Windows.Forms.Button btnvalider;
         private System.Windows.Forms.Button btnannuler;
-        private System.Windows.Forms.Button btnafficher;
         private System.Windows.Forms.Button btnsupprimer;
         private System.Windows.Forms.Button btnmodifier;
         private System.Windows.Forms.Button btnajouter;
