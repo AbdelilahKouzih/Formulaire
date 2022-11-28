@@ -170,8 +170,8 @@ namespace TP4_Formulaire
            
             cbx.Enabled = true;
             txtid.Enabled=true;
-            txtnom.Enabled = true;
-            txtprenom.Enabled = true;
+            txtnom.Enabled = false;
+            txtprenom.Enabled = false;
             btnsupprimer.Enabled = false;
           
             btnajouter.Enabled = false;
